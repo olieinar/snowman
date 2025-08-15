@@ -1,0 +1,10 @@
+^C:\CODE\SNOWMAN\BUILD-X64\CMAKEFILES\_CMAKELTOTEST-CXX\BIN\CMAKEFILES\4D0C8A3877E674AAECDE428557B908B6\GENERATE.STAMP.RULE
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/code/snowman/build-x64/CMakeFiles/_CMakeLTOTest-CXX/src -BC:/code/snowman/build-x64/CMakeFiles/_CMakeLTOTest-CXX/bin --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file C:/code/snowman/build-x64/CMakeFiles/_CMakeLTOTest-CXX/bin/lto-test.sln
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

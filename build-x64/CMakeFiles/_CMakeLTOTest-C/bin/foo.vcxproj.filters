@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="C:\code\snowman\build-x64\CMakeFiles\_CMakeLTOTest-C\src\foo.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\code\snowman\build-x64\CMakeFiles\_CMakeLTOTest-C\src\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{66B30EEA-E0DA-3A10-A3F6-6B0223964709}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

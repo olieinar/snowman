@@ -51,57 +51,6 @@ else()
   target_link_libraries(enroll-live PRIVATE snowman pulse-simple pulse)
 endif()
 
-add_executable(test-crash
-    helper.cpp
-    ../test_crash.cpp
-)
-target_include_directories(test-crash PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
-if (WIN32)
-  target_sources(test-crash PRIVATE pulseaudio_win.cpp)
-  target_link_libraries(test-crash PRIVATE snowman bcrypt ole32 uuid)
-  target_compile_definitions(test-crash PRIVATE WIN32_LEAN_AND_MEAN NOMINMAX _WIN32_WINNT=0x0601)
-else()
-  target_link_libraries(test-crash PRIVATE snowman pulse-simple pulse)
-endif()
-
-add_executable(voice-transcriber
-    helper.cpp
-    ../voice_transcriber.cpp
-)
-target_include_directories(voice-transcriber PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
-if (WIN32)
-  target_sources(voice-transcriber PRIVATE pulseaudio_win.cpp)
-  target_link_libraries(voice-transcriber PRIVATE snowman bcrypt ole32 uuid)
-  target_compile_definitions(voice-transcriber PRIVATE WIN32_LEAN_AND_MEAN NOMINMAX _WIN32_WINNT=0x0601)
-else()
-  target_link_libraries(voice-transcriber PRIVATE snowman pulse-simple pulse)
-endif()
-
-add_executable(streaming-transcriber
-    helper.cpp
-    ../streaming_transcriber.cpp
-)
-target_include_directories(streaming-transcriber PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
-if (WIN32)
-  target_sources(streaming-transcriber PRIVATE pulseaudio_win.cpp)
-  target_link_libraries(streaming-transcriber PRIVATE snowman bcrypt ole32 uuid)
-  target_compile_definitions(streaming-transcriber PRIVATE WIN32_LEAN_AND_MEAN NOMINMAX _WIN32_WINNT=0x0601)
-else()
-  target_link_libraries(streaming-transcriber PRIVATE snowman pulse-simple pulse)
-endif()
-
-add_executable(whisper-streaming-transcriber
-    helper.cpp
-    ../whisper_streaming_transcriber.cpp
-)
-target_include_directories(whisper-streaming-transcriber PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
-if (WIN32)
-  target_sources(whisper-streaming-transcriber PRIVATE pulseaudio_win.cpp)
-  target_link_libraries(whisper-streaming-transcriber PRIVATE snowman bcrypt ole32 uuid)
-  target_compile_definitions(whisper-streaming-transcriber PRIVATE WIN32_LEAN_AND_MEAN NOMINMAX _WIN32_WINNT=0x0601)
-else()
-  target_link_libraries(whisper-streaming-transcriber PRIVATE snowman pulse-simple pulse)
-endif()
 
 if(LTOAvailable)
     message(STATUS "LTO enabled for apps")

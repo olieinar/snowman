@@ -63,6 +63,67 @@ Training personal models is now possible using the `enroll` utility build along 
 ### Usage
 As before the main interface is `snowboy-detect.h` which includes the well known `snowboy::SnowboyDetect`, `snowboy::SnowboyVad`, `snowboy::SnowboyPersonalEnroll` and `snowboy::SnowboyTemplateCut` classes. Those classes provide a very high level interface to snowboy that should be sufficient for most applications. There is also a file `snowboy-detect-c.h` file which provides a C wrapper for the beforementioned classes and should make integration into other languages a lot easier.
 
+### Building
+
+#### Prerequisites
+
+- CMake 3.12 or newer
+- C++11 compatible compiler
+- vcpkg (for Windows builds)
+
+#### Windows (MSVC)
+
+1. **Install vcpkg** (if not already installed):
+   ```cmd
+   git clone https://github.com/Microsoft/vcpkg.git C:\vcpkg
+   cd C:\vcpkg
+   .\bootstrap-vcpkg.bat
+   ```
+
+2. **Install OpenBLAS dependency**:
+   ```cmd
+   C:\vcpkg\vcpkg install openblas:x64-windows
+   ```
+
+3. **Configure the build**:
+   ```cmd
+   cmake -B build -DCMAKE_TOOLCHAIN_FILE="C:\vcpkg\scripts\buildsystems\vcpkg.cmake" -DVCPKG_TARGET_TRIPLET=x64-windows
+   ```
+
+4. **Build the project**:
+   ```cmd
+   cmake --build build
+   ```
+
+#### Linux/macOS
+
+1. **Install dependencies**:
+   - Ubuntu/Debian: `sudo apt-get install libblas-dev liblapack-dev`
+   - macOS: `brew install openblas lapack`
+   - Fedora/CentOS: `sudo dnf install blas-devel lapack-devel`
+
+2. **Configure and build**:
+   ```bash
+   cmake -B build
+   cmake --build build
+   ```
+
+#### Build Options
+
+The following CMake options are available:
+
+- `SNOWMAN_BUILD_APPS` (default: ON) - Build helper applications like enroll and cut
+- `SNOWMAN_BUILD_TESTS` (default: ON) - Build unit tests
+- `SNOWMAN_BUILD_SHARED` (default: OFF) - Build as shared library instead of static
+- `SNOWMAN_BUILD_WITH_AVX` (default: OFF) - Enable AVX optimizations
+- `SNOWMAN_BUILD_WITH_AVX2` (default: OFF) - Enable AVX2 optimizations
+- `SNOWMAN_BUILD_NATIVE` (default: OFF) - Build for current CPU (enables all available instruction sets)
+
+Example with options:
+```cmd
+cmake -B build -DSNOWMAN_BUILD_SHARED=ON -DSNOWMAN_BUILD_WITH_AVX2=ON [other options...]
+```
+
 ### Contributing
 
 Any help would be highly appreciated. I am particularly looking for people with knowledge of machine

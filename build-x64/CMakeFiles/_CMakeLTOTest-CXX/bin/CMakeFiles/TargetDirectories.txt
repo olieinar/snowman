@@ -1,0 +1,4 @@
+C:/code/snowman/build-x64/CMakeFiles/_CMakeLTOTest-CXX/bin/CMakeFiles/foo.dir
+C:/code/snowman/build-x64/CMakeFiles/_CMakeLTOTest-CXX/bin/CMakeFiles/boo.dir
+C:/code/snowman/build-x64/CMakeFiles/_CMakeLTOTest-CXX/bin/CMakeFiles/ALL_BUILD.dir
+C:/code/snowman/build-x64/CMakeFiles/_CMakeLTOTest-CXX/bin/CMakeFiles/ZERO_CHECK.dir
