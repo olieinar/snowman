@@ -1,6 +1,8 @@
 #pragma once
 #include <array>
 #include <exception>
+#include <stdexcept>
+#include <string>
 #include <vector>
 
 namespace snowboy {

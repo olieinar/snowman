@@ -1,13 +1,11 @@
 #include <helper.h>
 #include <iostream>
 #include <snowboy-detect.h>
-#include <pulseaudio.h>
+#include "pulseaudio.hh"
 
-const static auto root = detect_project_root();
+namespace pa = pulseaudio::pa;
 
-namespace pa = pulseaudio;
-
-std::vector<short> record_word(pa::simple_record_stream& audio_in) {
+std::vector<short> record_word(pa::simple_record_stream& audio_in, const std::string& root) {
 	snowboy::SnowboyVad vad{root + "resources/common.res"};
 	std::vector<short> samples;
 	std::vector<short> result;
@@ -30,6 +28,7 @@ std::vector<short> record_word(pa::simple_record_stream& audio_in) {
 
 int main(int argc, const char** argv) try
 {
+	const auto root = detect_project_root();
 	std::string output = "model.pmdl", language = "en";
 	int64_t num_records = 3;
 	option_parser parser;
@@ -44,7 +43,7 @@ int main(int argc, const char** argv) try
 
 	for(int64_t i=1; i<=num_records; i++) {
 		std::cout << "[" << i << "/" << num_records << "] ";
-		auto sample = record_word(audio_in);
+		auto sample = record_word(audio_in, root);
 		std::cout << "[" << i << "/" << num_records << "] Got sample with length = " << (static_cast<float>(sample.size())/16000.0f) << "s (" << sample.size() << " samples)" << std::endl;
 		int new_size;
 		if(cut.CutTemplate(sample.data(), sample.size(), sample.data(), &new_size) != 0)

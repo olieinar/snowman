@@ -1,3 +1,4 @@
+#include "msvc_compat.h"
 #include <cmath>
 #include <framer-stream.h>
 #include <matrix-wrapper.h>

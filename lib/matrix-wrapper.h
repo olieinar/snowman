@@ -5,6 +5,11 @@
 #include <string>
 #include <vector>
 
+#if defined(_MSC_VER)
+#include <BaseTsd.h>
+typedef SSIZE_T ssize_t; // Windows-compatible signed size type
+#endif
+
 namespace snowboy {
 	class VectorBase;
 	struct SubMatrix;

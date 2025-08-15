@@ -1,3 +1,4 @@
+#include "msvc_compat.h"
 #include <feat-lib.h>
 #include <math.h>
 #include <matrix-wrapper.h>
@@ -129,7 +130,7 @@ namespace snowboy {
 		for (size_t i = 0; i < in.size() / 2 - 1; i++) {
 			out[i + 1] = in[i * 2 + 3] * in[i * 2 + 3] + in[i * 2 + 2] * in[i * 2 + 2];
 		}
-		//data.Resize(data.size() / 2, MatrixResizeType::kCopyData);
+		// data.Resize(data.size() / 2, MatrixResizeType::kCopyData);
 	}
 
 	FftItf::~FftItf() {}

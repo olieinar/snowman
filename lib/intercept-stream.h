@@ -1,4 +1,5 @@
 #pragma once
+#include "matrix-wrapper.h"
 #include <deque>
 #include <frame-info.h>
 #include <stream-itf.h>

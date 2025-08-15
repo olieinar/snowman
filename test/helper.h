@@ -1,14 +1,31 @@
 #pragma once
 #include <gtest/gtest.h>
 #include <matrix-wrapper.h>
+#include <cstdio>
 #include <ostream>
 #include <string>
+#include <typeinfo>
 #include <vector>
+
+#ifdef _WIN32
+#include <BaseTsd.h>
+typedef SSIZE_T ssize_t;
+#endif
+
+// Minimal rand_r replacement for MSVC (good enough for tests).
+#ifdef _MSC_VER
+static inline unsigned int rand_r(unsigned int* seed) {
+	unsigned int s = *seed;
+	s = s * 1103515245u + 12345u;
+	*seed = s;
+	return (s >> 16) & 0x7FFFu;
+}
+#endif
 
 template <typename... Args>
 void GTEST_WARN(const std::string& fmt, Args... args) {
 	std::string msg = "[          ] " + fmt + "\n";
-	testing::internal::ColoredPrintf(testing::internal::COLOR_YELLOW, msg.c_str(), std::forward<Args>(args)...);
+	printf(msg.c_str(), std::forward<Args>(args)...);
 }
 
 std::vector<short> read_sample_file(const std::string& filename, bool treat_wave = false);
@@ -51,7 +68,14 @@ std::ostream& operator<<(std::ostream& s, const std::vector<T>& o) {
 	s << " }";
 	return s;
 }
+
 #define MEMCHECK_ENABLED (!defined(__SANITIZE_ADDRESS__) || __SANITIZE_ADDRESS__ != 1)
+#ifdef _WIN32
+// The memcheck interposer relies on glibc internals; disable on Windows.
+#undef MEMCHECK_ENABLED
+#define MEMCHECK_ENABLED 0
+#endif
+
 struct MemoryChecker {
 	struct stacktrace {
 		void* trace[50];
@@ -93,7 +117,7 @@ std::ostream& operator<<(std::ostream& str, const MemoryChecker& o);
 #define MEMCHECK_START() \
 	do {                 \
 	} while (false)
-#define MEMCHECK_REPORT() "<memcheck disabled due to asan>"
+#define MEMCHECK_REPORT() "<memcheck disabled due to asan or platform>"
 #define MEMCHECK_DUMP() \
 	do {                \
 	} while (false)
